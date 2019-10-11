@@ -42,6 +42,7 @@ public class EmployeeService {
     public void addEmployee(Employee employee) {
         employee = fillEmployee(employee);
         employeeMapper.insert(employee);
+        System.out.println("emplyee: " + employee.getEmployeeNo() + employee.getName());
     }
 
     public void updateEmployee(Employee employee) {
