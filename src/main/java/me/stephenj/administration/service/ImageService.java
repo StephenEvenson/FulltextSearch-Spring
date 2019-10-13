@@ -26,7 +26,7 @@ import java.util.Map;
 @Service
 public class ImageService {
     private final String PyTorch_REST_API_URL = "http://localhost:5000/hat_predict";
-    private final String UPLOADED_FOLDER = "/home/ralph/images";
+    private final String UPLOADED_FOLDER = "/home/ralph/images/";
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
     private final String HADOOP_ADDR = "hdfs://localhost:50070";
 
