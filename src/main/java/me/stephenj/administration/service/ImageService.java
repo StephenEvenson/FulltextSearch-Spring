@@ -80,7 +80,7 @@ public class ImageService {
         FileStatus[] listStatus = fileSystem.listStatus(new org.apache.hadoop.fs.Path("/root/handled_img/"));
         for (FileStatus status : listStatus) {
             if (status.isFile()) {
-                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/ralph/" + status.getPath().getName()));
+                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/ralph/ShowImages/" + status.getPath().getName()));
             }
         }
         fileSystem.close();
