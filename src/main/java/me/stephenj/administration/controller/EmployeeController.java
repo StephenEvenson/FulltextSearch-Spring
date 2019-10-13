@@ -26,14 +26,12 @@ public class EmployeeController {
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
     public List<Employee> getEmployees() {
         System.out.println("get it!");
-        List<Employee> employees = employeeMapper.getAll();
-        return employees;
+        return employeeMapper.getAll();
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET)
     public Employee getEmployee(String employeeNo) {
-        Employee employee = employeeMapper.getOne(employeeNo);
-        return employee;
+        return employeeMapper.getOne(employeeNo);
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.POST)
