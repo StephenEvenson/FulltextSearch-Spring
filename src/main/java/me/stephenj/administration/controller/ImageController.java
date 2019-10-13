@@ -39,4 +39,13 @@ public class ImageController {
     public void imageIdentify(Image image) {
         imageService.imageIdentification(image.getImage());
     }
+
+    @RequestMapping(value = "/show", method = RequestMethod.GET)
+    public void show() {
+        try{
+            imageService.copyHDFSFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

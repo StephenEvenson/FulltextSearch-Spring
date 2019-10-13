@@ -1,6 +1,7 @@
 package me.stephenj.administration.service;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -71,6 +72,18 @@ public class ImageService {
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(mapj, headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(PyTorch_REST_API_URL, httpEntity, String.class);
         System.out.println(responseEntity.getBody());
+    }
+
+    public void copyHDFSFile() throws IOException, URISyntaxException, InterruptedException {
+        Configuration configuration = new Configuration();
+        FileSystem fileSystem = FileSystem.get(new URI(HADOOP_ADDR), configuration, "root");
+        FileStatus[] listStatus = fileSystem.listStatus(new org.apache.hadoop.fs.Path("/root/handled_img/"));
+        for (FileStatus status : listStatus) {
+            if (status.isFile()) {
+                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/ralph/" + status.getPath().getName()));
+            }
+        }
+        fileSystem.close();
     }
 
 }
