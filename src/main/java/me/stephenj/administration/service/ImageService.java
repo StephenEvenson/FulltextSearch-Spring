@@ -27,7 +27,7 @@ import java.util.Map;
 @Service
 public class ImageService {
     private final String PyTorch_REST_API_URL = "http://localhost:5000/hat_predict";
-    private final String UPLOADED_FOLDER = "/home/ralph/images/";
+    private final String UPLOADED_FOLDER = "/home/stephen/images/";
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
     private final String HADOOP_ADDR = "hdfs://localhost:9000";
 
@@ -54,7 +54,7 @@ public class ImageService {
     public void copyLocalFile(String fileName) throws IOException, URISyntaxException, InterruptedException {
         Configuration configuration = new Configuration();
         FileSystem fileSystem = FileSystem.get(new URI(HADOOP_ADDR), configuration, "root");
-        fileSystem.copyFromLocalFile(new org.apache.hadoop.fs.Path("/home/ralph/images/" + fileName), new org.apache.hadoop.fs.Path("/root/original_img/" + fileName));
+        fileSystem.copyFromLocalFile(new org.apache.hadoop.fs.Path("/home/stephen/images/" + fileName), new org.apache.hadoop.fs.Path("/root/original_img/" + fileName));
         fileSystem.close();
     }
 
@@ -80,7 +80,7 @@ public class ImageService {
         FileStatus[] listStatus = fileSystem.listStatus(new org.apache.hadoop.fs.Path("/root/handled_img/"));
         for (FileStatus status : listStatus) {
             if (status.isFile()) {
-                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/ralph/ShowImages/" + status.getPath().getName()));
+                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/stephen/ShowImages/" + status.getPath().getName()));
             }
         }
         fileSystem.close();
