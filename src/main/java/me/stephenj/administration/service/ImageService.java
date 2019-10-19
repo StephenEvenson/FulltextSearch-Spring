@@ -66,12 +66,12 @@ public class ImageService {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.add("image", fileName);
+//        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+//        map.add("image", fileName);
 
         Map<String, String> mapj = new HashMap<String, String>();
         mapj.put("image", fileName);
-        System.out.println("########### map :"  + map.toString());
+        System.out.println("########### map :"  + mapj.toString());
 
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(mapj, headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(PyTorch_REST_API_URL, httpEntity, String.class);
