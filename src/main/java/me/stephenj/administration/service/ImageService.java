@@ -76,6 +76,7 @@ public class ImageService {
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(mapj, headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(PyTorch_REST_API_URL, httpEntity, String.class);
         System.out.println(responseEntity.getBody());
+        System.out.println(responseEntity.toString());
     }
 
     public void copyHDFSFile() throws IOException, URISyntaxException, InterruptedException {
