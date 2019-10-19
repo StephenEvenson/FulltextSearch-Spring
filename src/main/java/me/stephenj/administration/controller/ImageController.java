@@ -18,7 +18,7 @@ public class ImageController {
     private ImageService imageService;
 
     @RequestMapping(value = "/imgFile", method = RequestMethod.POST)
-    public void imageIdentifyFile(@RequestParam("file") MultipartFile file) {
+    public Image imageIdentifyFile(@RequestParam("file") MultipartFile file) {
 
         String fileName = imageService.uploadFile(file);
 
@@ -29,10 +29,15 @@ public class ImageController {
              * 向python服务请求
              */
             imageService.imageIdentification(fileName);
+            Image image = new Image();
+            image.setImage(fileName);
+            imageService.show(image);
+            return image;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     @RequestMapping(value = "/img", method = RequestMethod.POST)

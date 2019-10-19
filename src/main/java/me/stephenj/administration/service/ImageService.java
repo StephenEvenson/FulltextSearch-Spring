@@ -1,5 +1,6 @@
 package me.stephenj.administration.service;
 
+import me.stephenj.administration.model.Image;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
@@ -24,6 +25,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author zhangruntian
+ */
 @Service
 public class ImageService {
     private final String PyTorch_REST_API_URL = "http://localhost:5000/hat_predict";
@@ -80,6 +84,18 @@ public class ImageService {
         FileStatus[] listStatus = fileSystem.listStatus(new org.apache.hadoop.fs.Path("/root/handled_img/"));
         for (FileStatus status : listStatus) {
             if (status.isFile()) {
+                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/stephen/ShowImages/" + status.getPath().getName()));
+            }
+        }
+        fileSystem.close();
+    }
+
+    public void show(Image image) throws IOException, URISyntaxException, InterruptedException {
+        Configuration configuration = new Configuration();
+        FileSystem fileSystem = FileSystem.get(new URI(HADOOP_ADDR), configuration, "root");
+        FileStatus[] listStatus = fileSystem.listStatus(new org.apache.hadoop.fs.Path("/root/handled_img/"));
+        for (FileStatus status : listStatus) {
+            if (status.isFile() && status.getPath().getName().equals(image.getImage())) {
                 fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/stephen/ShowImages/" + status.getPath().getName()));
             }
         }
