@@ -24,6 +24,12 @@ public interface EmployeeMapper extends Serializable {
     })
     Employee getOne(String employeeNo);
 
+    @Select("SELECT employeeNo, gender, e.name name, age, telephoneNo, p.positionNo, p.name positionName, d.departmentNo, d.name departmentName FROM `Employee` e LEFT JOIN `Position` p ON e.positionNo=p.positionNo LEFT JOIN `Department` d ON e.departmentNo=d.departmentNo WHERE e.name=#{employeeName};")
+    @Results({
+            @Result(property = "gender", column = "gender", javaType = EmployeeGenderEnum.class)
+    })
+    List<Employee> getByName(String employeeName);
+
     @Insert("INSERT INTO `Employee` (employeeNo, gender, name, age, telephoneNo, positionNo, departmentNo) VALUES (#{employeeNo}, #{gender}, #{name}, #{age}, #{telephoneNo}, #{positionNo}, #{departmentNo})")
     void insert(Employee employee);
 

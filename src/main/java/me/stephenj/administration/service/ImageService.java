@@ -78,7 +78,7 @@ public class ImageService {
         System.out.println(responseEntity.getBody());
         System.out.println("########### responseEntity all #############");
         System.out.println(responseEntity.toString());
-        System.out.println("########### end ################");
+        System.out.println("################# end ######################");
     }
 
     public void copyHDFSFile() throws IOException, URISyntaxException, InterruptedException {
