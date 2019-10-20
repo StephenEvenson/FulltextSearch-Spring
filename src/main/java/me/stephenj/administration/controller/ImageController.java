@@ -3,10 +3,7 @@ package me.stephenj.administration.controller;
 import me.stephenj.administration.model.Image;
 import me.stephenj.administration.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +14,7 @@ public class ImageController {
     @Autowired
     private ImageService imageService;
 
+    @CrossOrigin
     @RequestMapping(value = "/imgFile", method = RequestMethod.POST)
     public Image imageIdentifyFile(@RequestParam("file") MultipartFile file) {
 
