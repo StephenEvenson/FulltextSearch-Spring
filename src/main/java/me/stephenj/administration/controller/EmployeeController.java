@@ -39,6 +39,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employee", method = RequestMethod.POST)
     public void add(Employee employee) {
+        System.out.println("get a post request");
         employeeService.addEmployee(employee);
         System.out.println("add a employee record");
     }
