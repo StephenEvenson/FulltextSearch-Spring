@@ -40,6 +40,7 @@ public class EmployeeService {
     }
 
     public void addEmployee(Employee employee) {
+        System.out.println("##########employee: " + employee.getPositionName() + "#" + employee.getDepartmentName());
         employee = fillEmployee(employee);
         employeeMapper.insert(employee);
     }

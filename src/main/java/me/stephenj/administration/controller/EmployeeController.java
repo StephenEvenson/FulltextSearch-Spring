@@ -46,7 +46,7 @@ public class EmployeeController {
 
     @RequestMapping(value = "/employee", method = RequestMethod.PUT)
     public void update(Employee employee) {
-        employeeMapper.update(employee);
+        employeeService.updateEmployee(employee);
     }
 
     @RequestMapping(value = "/employee/{employeeNo}", method = RequestMethod.DELETE)
