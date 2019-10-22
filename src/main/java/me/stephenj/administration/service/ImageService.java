@@ -1,5 +1,6 @@
 package me.stephenj.administration.service;
 
+import com.google.gson.Gson;
 import me.stephenj.administration.model.Image;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
@@ -75,9 +76,17 @@ public class ImageService {
 
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(mapj, headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(PyTorch_REST_API_URL, httpEntity, String.class);
+        Gson gson = new Gson();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map = gson.fromJson(responseEntity.getBody(), map.getClass());
+//        String
+        for (String[] person : (String [][])map.get("predictions") ) {
+            System.out.println(person[0] + " 加上 " + person[1]);
+        }
         System.out.println(responseEntity.getBody());
+//        {"predictions":[["Dou","helmet",[175,32,391,290]]],"success":true}
         System.out.println("########### responseEntity all #############");
-        System.out.println(responseEntity.toString());
+        System.out.println(responseEntity.getBody());
         System.out.println("################# end ######################");
     }
 
