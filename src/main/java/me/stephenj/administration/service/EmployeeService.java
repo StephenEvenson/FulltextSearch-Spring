@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -47,5 +48,24 @@ public class EmployeeService {
     public void updateEmployee(Employee employee) {
         employee = fillEmployee(employee);
         employeeMapper.update(employee);
+    }
+
+    public List<Employee> showEmployee(int page) {
+        int rows = 10;
+        List<Employee> result = new ArrayList<Employee>();
+        List<Employee> employees = employeeMapper.getAll();
+        if (employees.size() > (page-1)*rows) {
+            int index = 0;
+            for (Employee emploee : employees) {
+                if (index <  page * 10 && index >= (page-1) * 10) {
+                    result.add(emploee);
+                }
+                index += 1;
+                if (index >= page * 10) {
+                    break;
+                }
+            }
+        }
+        return result;
     }
 }

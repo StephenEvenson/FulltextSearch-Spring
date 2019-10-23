@@ -21,13 +21,14 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
-    public List<Employee> getEmployees(@RequestParam(defaultValue = "") String employeeName) {
+    public List<Employee> getEmployees(@RequestParam(defaultValue = "") String employeeName, @RequestParam(defaultValue = "1") String currentPage) {
         System.out.println("get it!");
         List<Employee> employees = null;
+        int page = Integer.parseInt(currentPage);
         if (employeeName != null && employeeName.length() > 0) {
             employees = employeeMapper.getByName(employeeName);
         } else {
-            employees = employeeMapper.getAll();
+            employees = employeeService.showEmployee(page);
         }
         return employees;
     }
