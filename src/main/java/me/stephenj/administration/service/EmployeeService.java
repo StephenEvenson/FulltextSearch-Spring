@@ -60,6 +60,7 @@ public class EmployeeService {
                 if (index <  page * 10 && index >= (page-1) * 10) {
                     result.add(emploee);
                 }
+                System.out.println(index);
                 index += 1;
                 if (index >= page * 10) {
                     break;
