@@ -2,11 +2,11 @@ package me.stephenj.administration.model;
 
 public class Helmet {
     private String name;
-    private Boolean helmet;
+    private String helmet;
 
     public Helmet(){}
 
-    public Helmet(String name, Boolean helmet) {
+    public Helmet(String name, String helmet) {
         this.name = name;
         this.helmet = helmet;
     }
@@ -19,11 +19,11 @@ public class Helmet {
         this.name = name;
     }
 
-    public Boolean getHelmet() {
+    public String getHelmet() {
         return helmet;
     }
 
-    public void setHelmet(Boolean helmet) {
+    public void setHelmet(String helmet) {
         this.helmet = helmet;
     }
 }

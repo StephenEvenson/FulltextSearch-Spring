@@ -82,9 +82,9 @@ public class ImageService {
         for (List<String> person : (ArrayList<ArrayList<String>>)map.get("predictions") ) {
             System.out.println(person.get(0) + " 加上 " + person.get(1));
             if (person.get(1).equals("helmet")) {
-                helmets.add(new Helmet(person.get(0), true));
+                helmets.add(new Helmet(person.get(0), "已佩戴"));
             } else {
-                helmets.add(new Helmet(person.get(0), false));
+                helmets.add(new Helmet(person.get(0), "未佩戴"));
             }
         }
 //        List<String> list = map.get("predictions");
