@@ -115,7 +115,7 @@ public class ImageService {
         FileStatus[] listStatus = fileSystem.listStatus(new org.apache.hadoop.fs.Path("/root/handled_img/"));
         for (FileStatus status : listStatus) {
             if (status.isFile() && status.getPath().getName().equals(image.getImage())) {
-                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/stephen/ShowImages/" + status.getPath().getName()));
+                fileSystem.copyToLocalFile(false, new org.apache.hadoop.fs.Path("/root/handled_img/" + status.getPath().getName()), new org.apache.hadoop.fs.Path("/home/stephen/project/VueSmartPlant/static/images/" + status.getPath().getName()));
             }
         }
         fileSystem.close();
