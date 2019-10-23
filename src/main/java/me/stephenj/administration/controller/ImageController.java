@@ -30,7 +30,7 @@ public class ImageController {
             image.setImage(fileName);
             image.setHelmets(imageService.imageIdentification(fileName));
             imageService.show(image);
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             return image;
 
         } catch (Exception e) {
