@@ -1,6 +1,7 @@
 package me.stephenj.administration.service;
 
 import com.google.gson.Gson;
+import me.stephenj.administration.model.Helmet;
 import me.stephenj.administration.model.Image;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
@@ -61,7 +62,7 @@ public class ImageService {
         fileSystem.close();
     }
 
-    public void imageIdentification(String fileName) {
+    public List<Helmet> imageIdentification(String fileName) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -77,9 +78,14 @@ public class ImageService {
         Gson gson = new Gson();
         Map<String, Object> map = new HashMap<String, Object>();
         map = gson.fromJson(responseEntity.getBody(), map.getClass());
-//        String
+        List<Helmet> helmets = new ArrayList<Helmet>();
         for (List<String> person : (ArrayList<ArrayList<String>>)map.get("predictions") ) {
             System.out.println(person.get(0) + " 加上 " + person.get(1));
+            if (person.get(1).equals("helmet")) {
+                helmets.add(new Helmet(person.get(0), true));
+            } else {
+                helmets.add(new Helmet(person.get(0), false));
+            }
         }
 //        List<String> list = map.get("predictions");
         System.out.println("####### map中的：" + map.get("predictions").toString());
@@ -88,6 +94,7 @@ public class ImageService {
         System.out.println("########### responseEntity all #############");
         System.out.println(responseEntity.getBody());
         System.out.println("################# end ######################");
+        return helmets;
     }
 
     public void copyHDFSFile() throws IOException, URISyntaxException, InterruptedException {

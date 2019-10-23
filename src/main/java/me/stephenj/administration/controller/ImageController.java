@@ -26,9 +26,9 @@ public class ImageController {
             /*
              * 向python服务请求
              */
-            imageService.imageIdentification(fileName);
             Image image = new Image();
             image.setImage(fileName);
+            image.setHelmets(imageService.imageIdentification(fileName));
             imageService.show(image);
             return image;
 
