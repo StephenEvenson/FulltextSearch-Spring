@@ -78,9 +78,9 @@ public class ImageService {
         Map<String, Object> map = new HashMap<String, Object>();
         map = gson.fromJson(responseEntity.getBody(), map.getClass());
 //        String
-//        for (String[] person : (String [][])map.get("predictions") ) {
-//            System.out.println(person[0] + " 加上 " + person[1]);
-//        }
+        for (List<String> person : (ArrayList<ArrayList<String>>)map.get("predictions") ) {
+            System.out.println(person.get(0) + " 加上 " + person.get(1));
+        }
 //        List<String> list = map.get("predictions");
         System.out.println("####### map中的：" + map.get("predictions").toString());
         System.out.println(responseEntity.getBody());
