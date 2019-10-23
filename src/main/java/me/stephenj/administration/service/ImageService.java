@@ -22,9 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zhangruntian
@@ -83,7 +81,8 @@ public class ImageService {
 //        for (String[] person : (String [][])map.get("predictions") ) {
 //            System.out.println(person[0] + " 加上 " + person[1]);
 //        }
-        System.out.println("####### map中的：" + (String)map.get("predictions"));
+//        List<String> list = map.get("predictions");
+        System.out.println("####### map中的：" + map.get("predictions").getClass());
         System.out.println(responseEntity.getBody());
 //        {"predictions":[["Dou","helmet",[175,32,391,290]]],"success":true}
         System.out.println("########### responseEntity all #############");
