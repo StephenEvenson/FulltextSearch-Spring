@@ -15,14 +15,14 @@ public class LoginService {
 
     public Status checkUser(User user) {
         String password = userMapper.getByUser(user.getUser());
-        Status status = new Status();
+        Status status = new Status()
+        status.setLogin(false);;
         status.setAt(LoginFailAtEnum.password);
         if (password != null) {
             if (password.equals(user.getPassword())) {
                 status.setLogin(true);
             }
         } else {
-            status.setLogin(false);
             status.setAt(LoginFailAtEnum.user);
         }
         return status;
