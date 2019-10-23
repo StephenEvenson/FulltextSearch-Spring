@@ -1,6 +1,7 @@
 package me.stephenj.administration.controller;
 
 import me.stephenj.administration.mapper.EmployeeMapper;
+import me.stephenj.administration.model.Data;
 import me.stephenj.administration.model.Employee;
 import me.stephenj.administration.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,19 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
-    public List<Employee> getEmployees(@RequestParam(defaultValue = "") String employeeName, @RequestParam(defaultValue = "1") String currentPage) {
+    public Data getEmployees(@RequestParam(defaultValue = "") String employeeName, @RequestParam(defaultValue = "1") String currentPage) {
         System.out.println("get it!");
         List<Employee> employees = null;
+        Data data = new Data();
         int page = Integer.parseInt(currentPage);
         if (employeeName != null && employeeName.length() > 0) {
             employees = employeeMapper.getByName(employeeName);
+            data.setEmployees(employees);
+            data.setCount(1);
         } else {
-            employees = employeeService.showEmployee(page);
+            data = employeeService.showEmployee(page);
         }
-        return employees;
+        return data;
     }
 
     @RequestMapping(value = "/employee", method = RequestMethod.GET)

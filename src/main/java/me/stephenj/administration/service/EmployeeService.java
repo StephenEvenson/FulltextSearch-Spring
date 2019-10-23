@@ -3,6 +3,7 @@ package me.stephenj.administration.service;
 import me.stephenj.administration.mapper.DepartmentMapper;
 import me.stephenj.administration.mapper.EmployeeMapper;
 import me.stephenj.administration.mapper.PositionMapper;
+import me.stephenj.administration.model.Data;
 import me.stephenj.administration.model.Employee;
 import me.stephenj.administration.model.Position;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,9 @@ public class EmployeeService {
         employeeMapper.update(employee);
     }
 
-    public List<Employee> showEmployee(int page) {
+    public Data showEmployee(int page) {
         int rows = 10;
+        Data data = new Data();
         List<Employee> result = new ArrayList<Employee>();
         List<Employee> employees = employeeMapper.getAll();
         if (employees.size() > (page-1)*rows) {
@@ -68,6 +70,8 @@ public class EmployeeService {
                 }
             }
         }
-        return result;
+        data.setCount(employees.size());
+        data.setEmployees(result);
+        return data;
     }
 }
