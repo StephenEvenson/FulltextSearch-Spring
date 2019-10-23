@@ -75,7 +75,7 @@ public class ImageService {
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(mapj, headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(PyTorch_REST_API_URL, httpEntity, String.class);
         Gson gson = new Gson();
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap<String, Object>();
         map = gson.fromJson(responseEntity.getBody(), map.getClass());
 //        String
 //        for (String[] person : (String [][])map.get("predictions") ) {
