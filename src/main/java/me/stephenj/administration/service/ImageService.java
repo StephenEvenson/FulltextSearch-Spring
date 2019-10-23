@@ -82,7 +82,7 @@ public class ImageService {
 //            System.out.println(person[0] + " 加上 " + person[1]);
 //        }
 //        List<String> list = map.get("predictions");
-        System.out.println("####### map中的：" + map.get("predictions").getClass());
+        System.out.println("####### map中的：" + map.get("predictions").getClass().toString());
         System.out.println(responseEntity.getBody());
 //        {"predictions":[["Dou","helmet",[175,32,391,290]]],"success":true}
         System.out.println("########### responseEntity all #############");
