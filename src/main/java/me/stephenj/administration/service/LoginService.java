@@ -15,7 +15,7 @@ public class LoginService {
 
     public Status checkUser(User user) {
         String password = userMapper.getByUser(user.getUser());
-        Status status = new Status()
+        Status status = new Status();
         status.setLogin(false);;
         status.setAt(LoginFailAtEnum.password);
         if (password != null) {
