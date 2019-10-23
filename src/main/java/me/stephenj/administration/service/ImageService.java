@@ -77,12 +77,13 @@ public class ImageService {
         HttpEntity<Map<String, String>> httpEntity = new HttpEntity<>(mapj, headers);
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(PyTorch_REST_API_URL, httpEntity, String.class);
         Gson gson = new Gson();
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, String> map = new HashMap<String, String>();
         map = gson.fromJson(responseEntity.getBody(), map.getClass());
 //        String
-        for (String[] person : (String [][])map.get("predictions") ) {
-            System.out.println(person[0] + " 加上 " + person[1]);
-        }
+//        for (String[] person : (String [][])map.get("predictions") ) {
+//            System.out.println(person[0] + " 加上 " + person[1]);
+//        }
+        System.out.println("####### map中的：" + (String)map.get("predictions"));
         System.out.println(responseEntity.getBody());
 //        {"predictions":[["Dou","helmet",[175,32,391,290]]],"success":true}
         System.out.println("########### responseEntity all #############");
