@@ -61,6 +61,7 @@ public class EmployeeService {
                     result.add(emploee);
                 }
                 System.out.println(index);
+                System.out.println("####### page: " + page);
                 index += 1;
                 if (index >= page * 10) {
                     break;
