@@ -29,8 +29,8 @@ public class SearchService {
         query.setHighlightFragsize(100);
         query.setHighlightSnippets(6);
         query.add("hl.q", q);
-        query.setHighlightSimplePre("em");
-        query.setHighlightSimplePost("em");
+        query.setHighlightSimplePre("<em>");
+        query.setHighlightSimplePost("</em>");
         query.addHighlightField("content_txt");
         query.set("df", "content_txt");
         query.set("wt", "json");
