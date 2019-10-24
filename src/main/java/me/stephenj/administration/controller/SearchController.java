@@ -6,6 +6,7 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class SearchController {
     @Autowired
     SearchService searchService;
 
-    @RequestMapping
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
     public List<SearchItem> search(@RequestParam String q) {
         List<SearchItem> searchItems = searchService.getResult(q);
         for (int i = 0; i < searchItems.size(); i++) {
