@@ -5,6 +5,7 @@ import java.util.List;
 public class Image {
    private String image;
    private List<Helmet> helmets;
+   private Boolean existFace;
 
    public Image() {}
 
@@ -22,5 +23,13 @@ public class Image {
 
     public void setHelmets(List<Helmet> helmets) {
         this.helmets = helmets;
+    }
+
+    public Boolean getExistFace() {
+        return existFace;
+    }
+
+    public void setExistFace(Boolean existFace) {
+        this.existFace = existFace;
     }
 }

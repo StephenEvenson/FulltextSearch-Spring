@@ -11,8 +11,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -79,22 +77,28 @@ public class ImageService {
         Map<String, Object> map = new HashMap<String, Object>();
         map = gson.fromJson(responseEntity.getBody(), map.getClass());
         List<Helmet> helmets = new ArrayList<Helmet>();
-        for (List<String> person : (ArrayList<ArrayList<String>>)map.get("predictions") ) {
-            System.out.println(person.get(0) + " 加上 " + person.get(1));
-            if (person.get(1).equals("helmet")) {
-                helmets.add(new Helmet(person.get(0), "已佩戴"));
-            } else {
-                helmets.add(new Helmet(person.get(0), "未佩戴"));
+        try {
+            for (List<String> person : (ArrayList<ArrayList<String>>) map.get("predictions")) {
+                System.out.println(person.get(0) + " 加上 " + person.get(1));
+                if (person.get(1).equals("helmet")) {
+                    helmets.add(new Helmet(person.get(0), "已佩戴"));
+                } else {
+                    helmets.add(new Helmet(person.get(0), "未佩戴"));
+                }
             }
+        } catch (Exception e) {
+            helmets = null;
+        } finally {
+            return helmets;
         }
-//        List<String> list = map.get("predictions");
-        System.out.println("####### map中的：" + map.get("predictions").toString());
-        System.out.println(responseEntity.getBody());
-//        {"predictions":[["Dou","helmet",[175,32,391,290]]],"success":true}
-        System.out.println("########### responseEntity all #############");
-        System.out.println(responseEntity.getBody());
-        System.out.println("################# end ######################");
-        return helmets;
+////        List<String> list = map.get("predictions");
+//        System.out.println("####### map中的：" + map.get("predictions").toString());
+//        System.out.println(responseEntity.getBody());
+////        {"predictions":[["Dou","helmet",[175,32,391,290]]],"success":true}
+//        System.out.println("########### responseEntity all #############");
+//        System.out.println(responseEntity.getBody());
+//        System.out.println("################# end ######################");
+//        return helmets;
     }
 
     public void copyHDFSFile() throws IOException, URISyntaxException, InterruptedException {
