@@ -14,7 +14,7 @@ import java.util.*;
 
 @Service
 public class SearchService {
-    private static final String SOLR_ADDR = "localhost:8983/solr/SmartPlant";
+    private static final String SOLR_ADDR = "http://localhost:8983/solr/SmartPlant";
     private static final SolrClient solr = new HttpSolrClient.Builder(SOLR_ADDR).build();
 
     public List<SearchItem> getResult(String q) {
