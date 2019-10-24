@@ -32,7 +32,7 @@ public class SearchService {
         query.setHighlightSimplePre("em");
         query.setHighlightSimplePost("em");
         query.addHighlightField("content_txt");
-//        query.set("df", "content_txt");
+        query.set("df", "content_txt");
         query.set("wt", "json");
 
         QueryResponse response = null;
