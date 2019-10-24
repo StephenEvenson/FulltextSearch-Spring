@@ -42,7 +42,7 @@ public class ImageController {
                 image.setExistFace(false);
             }
             imageService.show(image);
-//            Thread.sleep(2000);
+            Thread.sleep(2000);
             return image;
 
         } catch (Exception e) {
