@@ -1,11 +1,15 @@
 package me.stephenj.administration.controller;
 
+import me.stephenj.administration.model.Helmet;
 import me.stephenj.administration.model.Image;
 import me.stephenj.administration.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestScope
@@ -19,6 +23,7 @@ public class ImageController {
     public Image imageIdentifyFile(@RequestParam("file") MultipartFile file) {
 
         String fileName = imageService.uploadFile(file);
+        List<Helmet> helmets;
 
         try {
             imageService.copyLocalFile(fileName);
@@ -28,7 +33,14 @@ public class ImageController {
              */
             Image image = new Image();
             image.setImage(fileName);
-            image.setHelmets(imageService.imageIdentification(fileName));
+            helmets = imageService.imageIdentification(fileName);
+            if (helmets != null) {
+                image.setHelmets(helmets);
+                image.setExistFace(true);
+            } else {
+                image.setHelmets(new ArrayList<>());
+                image.setExistFace(false);
+            }
             imageService.show(image);
             Thread.sleep(2000);
             return image;
