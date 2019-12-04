@@ -26,13 +26,14 @@ public class SearchService {
         query.setStart(0);
         query.setRows(20);
         query.setHighlight(true);
-        query.setHighlightFragsize(100);
-        query.setHighlightSnippets(6);
+        query.setHighlightFragsize(200);
+        query.setHighlightSnippets(10);
         query.add("hl.q", q);
         query.setHighlightSimplePre("<em>");
         query.setHighlightSimplePost("</em>");
         query.addHighlightField("content_txt");
         query.set("df", "content_txt");
+        query.searchItem("id");
         query.set("wt", "json");
 
         QueryResponse response = null;
