@@ -2,9 +2,11 @@ package me.stephenj.administration.mapper;
 
 import me.stephenj.administration.model.Position;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface PositionMapper {
    @Select("SELECT * FROM `Position`")
    List<Position> getAll();

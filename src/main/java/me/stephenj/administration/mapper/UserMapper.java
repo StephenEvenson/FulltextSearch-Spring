@@ -5,12 +5,15 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author zhangruntian
  */
+
+@Component
 public interface UserMapper {
     @Select("SELECT * FROM `Users`")
     List<User> getAll();

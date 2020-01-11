@@ -3,6 +3,7 @@ package me.stephenj.administration.mapper;
 import me.stephenj.administration.enums.EmployeeGenderEnum;
 import me.stephenj.administration.model.Employee;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * @author zhangruntian
  */
+@Component
 public interface EmployeeMapper extends Serializable {
 
     @Select("SELECT employeeNo, gender, e.name name, age, telephoneNo, p.positionNo, p.name positionName, d.departmentNo, d.name departmentName FROM `Employee` e LEFT JOIN `Position` p ON e.positionNo=p.positionNo LEFT JOIN `Department` d ON e.departmentNo=d.departmentNo;")
