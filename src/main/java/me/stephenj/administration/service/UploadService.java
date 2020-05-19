@@ -22,10 +22,10 @@ public class UploadService {
         String filename = file.getOriginalFilename();
         String[] filenameArray = filename.split("\\.");
         String prefix = filenameArray[filenameArray.length - 2];
-        String suffix = filenameArray[filenameArray.length - 1];
-        File newFile = new File(filePath, prefix + "." + suffix);
+        String suffix = "." + filenameArray[filenameArray.length - 1];
+        File newFile = new File(filePath, prefix + suffix);
         for (int i = 1; newFile.exists() && i < Integer.MAX_VALUE; i++) {
-            newFile = new File(filePath, prefix + '(' + i + ').' + suffix);
+            newFile = new File(filePath, prefix + '(' + i + ')' + suffix);
         }
         file.transferTo(newFile);
         return 1;
