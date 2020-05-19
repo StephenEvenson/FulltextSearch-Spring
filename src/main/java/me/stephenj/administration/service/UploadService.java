@@ -28,6 +28,17 @@ public class UploadService {
             newFile = new File(filePath, prefix + '(' + i + ')' + suffix);
         }
         file.transferTo(newFile);
+        solrPost(fileDir);
+        return 1;
+    }
+
+    public int solrPost(String fileDir) {
+        try {
+            Process process = Runtime.getRuntime().exec("/home/stephen/script/solr_post.sh " + fileDir);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
         return 1;
     }
 }
