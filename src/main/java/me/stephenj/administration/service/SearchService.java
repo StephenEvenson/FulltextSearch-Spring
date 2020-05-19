@@ -14,7 +14,7 @@ import java.util.*;
 
 @Service
 public class SearchService {
-    private static final String SOLR_ADDR = "http://localhost:8983/solr/SmartPlant";
+    private static final String SOLR_ADDR = "http://192.168.1.19:8983/solr/SmartPlant";
     private static final SolrClient solr = new HttpSolrClient.Builder(SOLR_ADDR).build();
 
     public List<SearchItem> getResult(String q) {
@@ -63,9 +63,7 @@ public class SearchService {
             searchResult = new ArrayList<>();
 
             //遍历高亮map
-            Iterator<Map.Entry<String, Map<String, List<String>>>> entries = hightLights.entrySet().iterator();
-            while (entries.hasNext()) {
-                Map.Entry<String, Map<String, List<String>>> entry = entries.next();
+            for (Map.Entry<String, Map<String, List<String>>> entry : hightLights.entrySet()) {
                 searchItem = new SearchItem();
 //                searchItem.setId(index++);
                 //如：/home/doc/2019年度国家社科基金重大项目招标选题研究方向.docx,  筛选最后一个为标题名
@@ -73,13 +71,11 @@ public class SearchService {
                 searchItem.setTitle(splits[splits.length - 1]);
 
                 //第二层遍历
-                Iterator<Map.Entry<String, List<String>>> item_entries = entry.getValue().entrySet().iterator();
-                while (item_entries.hasNext()) {
-                    Map.Entry<String, List<String>> item_entry = item_entries.next();
+                for (Map.Entry<String, List<String>> item_entry : entry.getValue().entrySet()) {
                     //放置文本内容
                     searchItem.setHighlight(item_entry.getValue());
                 }
-                if (searchItem.getHighlight()==null){
+                if (searchItem.getHighlight() == null) {
                     String[] ex = {"文中没有与搜索关键词匹配的内容"};
                     searchItem.setHighlight(Arrays.asList(ex));
                 }
